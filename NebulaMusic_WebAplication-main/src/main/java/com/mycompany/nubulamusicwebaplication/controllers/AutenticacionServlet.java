@@ -36,12 +36,16 @@ public class AutenticacionServlet extends HttpServlet {
         Usuario usuario = usuarioService.autenticar(correo, contrasenia);
 
         try {
-
+            //para no crear una sesion
+            HttpSession sesionAnterior = request.getSession(false);
+            
+            if (sesionAnterior != null) {
+                sesionAnterior.invalidate();
+            }
+            
             HttpSession sesion = request.getSession(true);
 
-            sesion.setAttribute("correo", usuario.getCorreo());
             sesion.setAttribute("usuario", usuario);
-            sesion.setAttribute("nombre", usuario.getNombre());
             
            // response.sendRedirect(request.getContextPath() + "/index.jsp");
 

@@ -30,7 +30,7 @@
         <%@include file="/WEB-INF/jsp/fragmentos/header.jspf" %>
         
         <c:if test="${sessionScope.usuario != null}">
-            <h2>Bienvenido ${sessionScope.usuario}</h2>
+            <h2>Bienvenido ${sessionScope.usuario.correo}</h2>
         </c:if>
 
 

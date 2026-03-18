@@ -25,6 +25,7 @@ public class RegistroServlet extends HttpServlet {
 
     private final IUsuarioService usuarioService = new UsuarioService();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -46,11 +47,9 @@ public class RegistroServlet extends HttpServlet {
             response.sendRedirect("iniciar-sesion.jsp");
             request.setAttribute(terminos, this);
             request.getRequestDispatcher("/views/auth/iniciar-sesion.jsp").forward(request, response);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ServletException | IOException e) {
            // request.setAttribute("error", e.getMessage());
             //request.getRequestDispatcher("/views/auth/iniciar-sesion.jsp").forward(request, response);
-            throw new ServletException("error al registrar usuario" + e.getMessage());
-        } catch (Exception e) {
             throw new ServletException("error al registrar usuario" + e.getMessage());
         }
         
