@@ -16,30 +16,8 @@
 </head>
 
 <body>
-    <nav class="main-nav">
-
-        <a class="logo" href="./index.jsp">
-            <img src="${pageContext.request.contextPath}/assets/img/nebula-03.svg" alt="Nebula Music">
-        </a>
-
-        <!-- Checkbox oculto -->
-        <input type="checkbox" id="menu-toggle">
-
-        <!-- Botón hamburguesa -->
-        <label for="menu-toggle" class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-
-        <!-- Menú -->
-        <ul class="nav-links">
-            <li><a href="${pageContext.request.contextPath}/views/aplication/about.jsp">Nosotros</a></li>
-            <li><a href="${pageContext.request.contextPath}/views/aplication/comunidad.jsp">Comunidad</a></li>
-            <li><a href="${pageContext.request.contextPath}/views/auth/iniciar-sesion.jsp">Iniciar Sesión</a></li>
-        </ul>
-
-    </nav>
+    <%@include file="/WEB-INF/jsp/fragmentos/header.jspf" %>
+    
     <main class="playlist-container">
         <header class="playlist-header">
             <div class="playlist-cover">

@@ -11,36 +11,14 @@
 <head>
     <title>Nosotros - Nébula</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href=".${pageContext.request.contextPath}/assets/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
 <body>
-    <nav class="main-nav">
-
-        <a class="logo" href="./index.>"
-            <img src="${pageContext.request.contextPath}/assets/img/nebula-03.svg" alt="Nebula Music">
-        </a>
-
-        <!-- Checkbox oculto -->
-        <input type="checkbox" id="menu-toggle">
-
-        <!-- Botón hamburguesa -->
-        <label for="menu-toggle" class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-
-        <!-- Menú -->
-        <ul class="nav-links">
-            <li><a href="${pageContext.request.contextPath}/views/aplication/about.jsp">Nosotros</a></li>
-            <li><a href="${pageContext.request.contextPath}/views/aplication/comunidad.jsp">Comunidad</a></li>
-            <li><a href="${pageContext.request.contextPath}/views/auth/iniciar-sesion.jsp">Iniciar Sesión</a></li>
-        </ul>
-
-    </nav>
+    <%@include file="/WEB-INF/jsp/fragmentos/header.jspf" %>
+    
     <header class="about-header">
         <img src="${pageContext.request.contextPath}/assets/img/header2.jpg" />
         <h1>Acerca de nosotros</h1>

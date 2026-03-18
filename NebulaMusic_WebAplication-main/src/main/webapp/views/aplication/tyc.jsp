@@ -11,26 +11,11 @@
 <head>
     <title>Términos y condiciones - Nébula</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/styles.css" />
 </head>
 
 <body>
-    <nav>
-        <a class="logo" href="./index.jsp>"
-            <img src="./imgs/nebula-03.svg">
-        </a>
-         <ul>
-                <li>
-                    <a href="./about.jsp">Nosotros</a>
-                </li>
-                <li>
-                     <a href="./comunidad.jsp">Comunidad</a>
-                </li>
-                <li>
-                    <a href="./iniciar-sesion.jsp">Iniciar Sesión</a>
-                </li>
-            </ul>
-    </nav>
+    <%@include file="/WEB-INF/jsp/fragmentos/header.jspf" %>
     <header>
         <img src="./imgs/header2.jpg" />
         <h1>Términos y condiciones</h1>
