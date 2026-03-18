@@ -9,8 +9,8 @@ import com.mycompany.nubulamusicwebaplication.models.Usuario;
 import com.mycompany.nubulamusicwebaplication.service.AlbumService;
 import com.mycompany.nubulamusicwebaplication.service.IAlbumService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -26,6 +25,11 @@ import java.util.List;
  * @author Adel
  */
 @WebServlet(name = "AlbumServlet", urlPatterns = {"/albums"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 2,
+        maxRequestSize = 1024 * 1024 * 5
+)
 public class AlbumServlet extends HttpServlet {
 
     private final IAlbumService albumService = new AlbumService();
