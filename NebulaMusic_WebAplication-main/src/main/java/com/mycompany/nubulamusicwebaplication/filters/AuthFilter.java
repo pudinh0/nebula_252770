@@ -36,10 +36,11 @@ public class AuthFilter implements Filter {
         
         boolean loggedIn = (session != null && session.getAttribute("usuario") != null);
         boolean loginRequest = path.contains("iniciar-sesion.jsp") || path.contains("registro.jsp") || path.contains("autenticacion");
+        boolean apiRequest = path.contains("/api/");
         
         boolean resourceStaticRequest = path.contains("/assets/") || path.contains("css") || path.contains("img");
         
-        if (loggedIn || loginRequest || resourceStaticRequest || path.endsWith("tyc.jsp")) {
+        if (apiRequest || loggedIn || loginRequest || resourceStaticRequest || path.endsWith("tyc.jsp")) {
             chain.doFilter(request, response);
         } else {
             
