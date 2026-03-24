@@ -24,7 +24,7 @@ import com.mycompany.nubulamusicwebaplication.dto.UsuarioRequestDTO;
  *
  * @author Adel
  */
-@WebServlet(name = "UsuarioServletAPI", urlPatterns = {"/api/usuario/*"})
+@WebServlet(name = "UsuarioServletAPI", value = "/api/usuario/*")
 public class UsuarioServletAPI extends HttpServlet {
 
     private IUsuarioService usuarioService = new UsuarioService();
@@ -156,6 +156,7 @@ public class UsuarioServletAPI extends HttpServlet {
             usuario.setId(id);
             usuario.setNombre(req.getNombre());
             usuario.setCorreo(req.getCorreo());
+            usuario.setContrasenia(req.getContrasenia());
             usuario.setPseudonimo(req.getPseudonimo());
             usuario.setEstado(req.getEstado());
             usuario.setCuenta(req.getCuenta());
@@ -169,11 +170,12 @@ public class UsuarioServletAPI extends HttpServlet {
             JSONMapper.mapper.writeValue(response.getWriter(), apiResponse);
 
         } catch (Exception e) {
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
             apiResponse.setSuccess(false);
             apiResponse.setMessage(e.getMessage());
-            
+            JSONMapper.mapper.writeValue(response.getWriter(), apiResponse);
         }
     }
 

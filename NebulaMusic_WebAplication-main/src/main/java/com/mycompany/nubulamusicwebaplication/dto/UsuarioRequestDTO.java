@@ -5,6 +5,7 @@
 
 package com.mycompany.nubulamusicwebaplication.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 
 /**
@@ -18,6 +19,7 @@ public class UsuarioRequestDTO {
     private String pseudonimo;
     private String estado;
     private String cuenta;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
     private boolean terminosAceptados;
 
