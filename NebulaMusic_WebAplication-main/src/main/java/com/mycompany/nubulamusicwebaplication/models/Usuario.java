@@ -134,4 +134,10 @@ public class Usuario implements Serializable {
     public void setTerminosAceptados(boolean terminosAceptados) {
         this.terminosAceptados = terminosAceptados;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 }
