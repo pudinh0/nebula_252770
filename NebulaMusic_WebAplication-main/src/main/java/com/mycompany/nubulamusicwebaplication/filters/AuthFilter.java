@@ -4,6 +4,7 @@
  */
 package com.mycompany.nubulamusicwebaplication.filters;
 
+import com.mycompany.nubulamusicwebaplication.util.JWTUtil;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -34,17 +35,53 @@ public class AuthFilter implements Filter {
         String path = req.getRequestURI();
         HttpSession session = req.getSession(false);
         
+        
+        
+        String authHeader = req.getHeader("Authorization");
+        boolean tokenValido = false;
+        
+        if (authHeader != null && authHeader.startsWith("Barer")) {
+            String token = authHeader.substring(7);
+            
+            try {
+                String correo = JWTUtil.validarToken(token);
+                req.setAttribute("usuario", correo);
+            } catch (Exception e) {
+                tokenValido = false;
+            }
+        }
+        
+        
         boolean loggedIn = (session != null && session.getAttribute("usuario") != null);
-        boolean loginRequest = path.contains("iniciar-sesion.jsp") || path.contains("registro.jsp") || path.contains("autenticacion");
+        
+        boolean loginRequest = path.contains("iniciar-sesion.jsp") || path.contains("registro.jsp")
+                || path.contains("autenticacion") || path.contains("/api/auth");
+        
         boolean apiRequest = path.contains("/api/");
         
         boolean resourceStaticRequest = path.contains("/assets/") || path.contains("css") || path.contains("img");
-        
-        if (apiRequest || loggedIn || loginRequest || resourceStaticRequest || path.endsWith("tyc.jsp")) {
+        boolean tyc = path.endsWith("tyc.jsp");
+        if (loginRequest || resourceStaticRequest ||  tyc) {
             chain.doFilter(request, response);
-        } else {
-            
-            res.sendRedirect(req.getContextPath() + "/views/auth/iniciar-sesion.jsp");
+            return;
         }
+        
+        if (apiRequest) {
+            if (!tokenValido) {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.getWriter().write("no autorizado");
+                return;
+            }
+            
+            chain.doFilter(request, response);
+            return;
+        }
+        
+        if (loggedIn) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
+        res.sendRedirect(req.getContextPath() +"/views/auth/iniciar-sesion.jsp");
     }
 }
