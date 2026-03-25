@@ -1,12 +1,15 @@
 com\mycompany\nubulamusicwebaplication\dto\ResponseMessageDTO.class
 com\mycompany\nubulamusicwebaplication\util\JSONMapper.class
 com\mycompany\nubulamusicwebaplication\service\UsuarioService.class
+com\mycompany\nubulamusicwebaplication\apirest\AuthServletAPI.class
 com\mycompany\nubulamusicwebaplication\dao\IAlbumDAO.class
 com\mycompany\nubulamusicwebaplication\dto\UsuarioDTO.class
 com\mycompany\nubulamusicwebaplication\models\Album.class
 com\mycompany\nubulamusicwebaplication\models\Usuario.class
 com\mycompany\nubulamusicwebaplication\dto\UsuarioRequestDTO.class
 com\mycompany\nubulamusicwebaplication\JakartaRestConfiguration.class
+com\mycompany\nubulamusicwebaplication\dto\UsuarioAuthDTO.class
+com\mycompany\nubulamusicwebaplication\util\JWTUtil.class
 com\mycompany\nubulamusicwebaplication\controllers\AppListener.class
 com\mycompany\nubulamusicwebaplication\service\IAlbumService.class
 com\mycompany\nubulamusicwebaplication\controllers\AlbumServlet.class
