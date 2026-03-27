@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.mycompany.nubulamusicwebaplication.util;
 
 import io.jsonwebtoken.Jwts;
@@ -15,29 +14,28 @@ import javax.crypto.SecretKey;
  * @author adell
  */
 public class JWTUtil {
-    
-    private static final String SECRET= "mi_super_secreta_firma_jwt_1234567891011";
+
+    private static final String SECRET = "mi_super_secreta_firma_jwt_1234567891011";
     private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
-    
-    public static String generarToken(String  usuario){
-        
+
+    public static String generarToken(String usuario) {
+
         //se genera un jwt que expira en 1 hora
         return Jwts.builder()
                 .subject(usuario)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis()+1000*60/60))
+                .expiration(new Date(System.currentTimeMillis() + (1000 * 60 * 60)))
                 .signWith(KEY)
                 .compact();
     }
-    
-    
-    public static String validarToken(String token){
+
+    public static String validarToken(String token) {
         return Jwts.parser()
                 .verifyWith(KEY)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
-    
+
     }
 }

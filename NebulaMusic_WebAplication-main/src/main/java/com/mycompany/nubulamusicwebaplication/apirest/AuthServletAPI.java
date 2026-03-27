@@ -40,18 +40,18 @@ public class AuthServletAPI extends HttpServlet {
         ResponseMessageDTO mensaje = new ResponseMessageDTO();
 
         if (user == null) {
-            response.setStatus(401);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
             mensaje.setSuccess(false);
-            mensaje.setMessage("credenciales invalidas");
+            mensaje.setMessage("Credenciales incorrectas para el correo: " + req.getCorreo());
             JSONMapper.mapper.writeValue(response.getWriter(), mensaje);
-
             return;
         }
 
         String token = JWTUtil.generarToken(user.getCorreo());
+
         mensaje.setSuccess(true);
         mensaje.setMessage(token);
-
+        response.setContentType("application/json");
         JSONMapper.mapper.writeValue(response.getWriter(), mensaje);
     }
 

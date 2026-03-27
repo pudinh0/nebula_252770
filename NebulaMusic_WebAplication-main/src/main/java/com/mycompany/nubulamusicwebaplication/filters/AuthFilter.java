@@ -40,27 +40,31 @@ public class AuthFilter implements Filter {
         String authHeader = req.getHeader("Authorization");
         boolean tokenValido = false;
         
-        if (authHeader != null && authHeader.startsWith("Barer")) {
+        if (authHeader != null && authHeader.startsWith("Bearer")) {
             String token = authHeader.substring(7);
             
             try {
                 String correo = JWTUtil.validarToken(token);
                 req.setAttribute("usuario", correo);
+                tokenValido = true;
             } catch (Exception e) {
                 tokenValido = false;
             }
         }
         
-        
+       
         boolean loggedIn = (session != null && session.getAttribute("usuario") != null);
         
+        boolean apiRequest = path.contains("/api/");
         boolean loginRequest = path.contains("iniciar-sesion.jsp") || path.contains("registro.jsp")
                 || path.contains("autenticacion") || path.contains("/api/auth/");
         
-        boolean apiRequest = path.contains("/api/");
+        
         
         boolean resourceStaticRequest = path.contains("/assets/") || path.contains("css") || path.contains("img");
+        
         boolean tyc = path.endsWith("tyc.jsp");
+        
         if (loginRequest || resourceStaticRequest ||  tyc) {
             chain.doFilter(request, response);
             return;
